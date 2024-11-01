@@ -1,30 +1,24 @@
-import axios from 'axios';
+const { CohereClientV2 } = require('cohere-ai');
 
 export async function submitQuizAnswersToOpenAI(answers) {
-  const apiKey = process.env.OPENAI_API_KEY;
+  const cohere = new CohereClientV2({
+    token: 'EteMKTdPQNEtHQiG3faUTk7ddmQyLSJCzxRZegtL',
+  });
   
   try {
-    const response = await axios.post(
-      'https://api.openai.com/v1/chat/completions',
-      {
-        model: 'gpt-3.5-turbo',
-        messages: [
-          { role: 'system', content: 'Você é um assistente que analisa respostas de um quiz.' },
-          { role: 'user', content: `Aqui estão as respostas do quiz: ${JSON.stringify(answers)}` }
-        ],
-        max_tokens: 100
-      },
-      {
-        headers: {
-          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-          'Content-Type': 'application/json'
-        }
-      }
-    );
-    console.log('Resposta da OpenAI:', response.data);
-    return response.data;
+    const response = await cohere.chat({
+      model: 'command-r-plus',
+      messages: [
+        {
+          role: 'user',
+          content: `Com base nessas respostas, faça uma dieta para mim, envie SOMENTE e DIRETAMENTE as refeições: ${JSON.stringify(answers)}`,
+          //content: `Envie somente o nome de 5 alimentos com mais proteínas`,
+        },
+      ],
+    });
+    return response.message.content[0].text;
   } catch (error) {
-    console.error('Erro ao enviar as respostas para a OpenAI:', error);
+    console.error('Erro ao enviar as respostas para a API:', error);
     throw error;
   }
 }

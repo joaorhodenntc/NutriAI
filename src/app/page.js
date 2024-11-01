@@ -9,7 +9,9 @@ export default function Home() {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <button onClick={() => router.push("/quiz-1")}>Iniciar Teste</button>
+      <button onClick={() => router.push("/quiz-1")} className="mb-4 px-4 py-2 bg-[#BCE0A1] rounded font-semibold">
+          Iniciar Teste 🚀
+        </button>
     </div>
   );
 }

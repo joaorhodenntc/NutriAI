@@ -1,6 +1,7 @@
 "use client"
 import Quiz from "@/components/quiz";
 import { useQuiz } from "@/context/QuizContext";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function Quiz5() {
@@ -13,9 +14,10 @@ export default function Quiz5() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex flex-col items-center min-h-screen">
+      <Image src="/assets/logo-nutriai.png" onClick={() => router.push("/")} className="mb-10 mt-10 cursor-pointer" alt="Logo" width={150} height={150} />
       <Quiz 
-              title="Qual o seu nível de atividade física atual?"
+              title="Qual o seu nível de atividade física atual? 🏃"
               options={[
                 { letter: "A", text: "Sedentário (pouca ou nenhuma atividade física)" },
                 { letter: "B", text: "Leve (exercício 1-2 dias por semana)" },

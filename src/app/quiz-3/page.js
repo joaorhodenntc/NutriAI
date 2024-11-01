@@ -1,30 +1,14 @@
 "use client"
-import Quiz from "@/components/quiz";
-import { useQuiz } from "@/context/QuizContext";
+import QuizSlider from "@/components/quizSlider";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Quiz3() {
-  const { saveAnswer } = useQuiz();
   const router = useRouter();
-
-  const handleOptionClick = (answer) => {
-    saveAnswer("Qual seu peso atual (aproximado)?", answer);
-    router.push("/quiz-4");
-  };
-
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <Quiz 
-              title="Qual seu peso atual (aproximado)?"
-              options={[
-                { letter: "A", text: "40-49" },
-                { letter: "B", text: "50-59" },
-                { letter: "C", text: "60-69" },
-                { letter: "D", text: "70-79" },
-                { letter: "E", text: "80 ou mais" }
-               ]}
-               onAnswerSelect={handleOptionClick}
-        />
+    <div className="flex flex-col items-center min-h-screen">
+      <Image src="/assets/logo-nutriai.png" onClick={() => router.push("/")} className="mb-10 mt-10 cursor-pointer" alt="Logo" width={150} height={150} />
+      <QuizSlider title="Qual seu peso atual (aproximado)? 🏋️" route={"/quiz-4"} measure={"kg"} />
     </div>
   );
 }
