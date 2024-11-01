@@ -10,7 +10,7 @@ export default function Quiz6() {
 
   const handleOptionClick = (answer) => {
     saveAnswer("Qual a sua rotina de trabalho?", answer);
-    router.push("/quiz-final");
+    router.push("/dieta");
   };
 
   return (

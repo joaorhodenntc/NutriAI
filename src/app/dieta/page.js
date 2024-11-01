@@ -1,9 +1,9 @@
-"use client"
+"use client"; // Certifique-se de que esta linha está presente
+
 import { useState, useEffect } from "react";
 import { useQuiz } from "@/context/QuizContext";
-import { submitQuizAnswersToOpenAI } from "@/services/quizApi";
 import Image from "next/image";
-import html2pdf from "html2pdf.js";
+import { CohereClientV2 } from 'cohere-ai'; // Importação da biblioteca
 
 export default function QuizFinal() {
   const { answers } = useQuiz();
@@ -11,35 +11,32 @@ export default function QuizFinal() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    submit();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const submit = async () => {
+      const cohere = new CohereClientV2({
+        token: 'EteMKTdPQNEtHQiG3faUTk7ddmQyLSJCzxRZegtL',
+      });
 
-  async function submit() {
-    try {
-      const response = await submitQuizAnswersToOpenAI(answers);
-      if(response) {
+      try {
+        const response = await cohere.chat({
+          model: 'command-r-plus',
+          messages: [
+            {
+              role: 'user',
+              content: `Com base nessas respostas, faça uma dieta para mim, envie SOMENTE e DIRETAMENTE as refeições: ${JSON.stringify(answers)}`,
+            },
+          ],
+        });
+        setResponseText(response.message.content[0].text);
+        console.log("Resposta da API OpenAI:", response.message.content[0].text);
+      } catch (error) {
+        console.error("Erro ao enviar as respostas para a API:", error);
+      } finally {
         setIsLoading(false);
       }
-      setResponseText(response);
-      console.log("Resposta da API OpenAI:", response);
-    } catch (error) {
-      console.error("Erro ao submeter respostas:", error);
-    }
-  }
+    };
 
-  // const handleExportPDF = () => {
-  //   if (typeof window === "undefined") return;
-
-  //   const element = document.getElementById("diet-content"); // elemento a ser exportado
-  //   html2pdf().set({
-  //     margin: 1,
-  //     filename: "dieta2.pdf",
-  //     image: { type: "jpeg", quality: 0.98 },
-  //     html2canvas: { scale: 2 },
-  //     jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
-  //   }).from(element).save();
-  // };
+    submit(); 
+  }, [answers]);
 
   const formatResponseText = (text) => {
     const keywords = [
@@ -63,25 +60,30 @@ export default function QuizFinal() {
     });
   };
 
+
   return (
     <div className="flex flex-col justify-center items-center min-h-screen text-center">
-      
       {isLoading && (
         <div>
-          <Image src="/assets/loading3.gif" alt="Logo" width={280} height={180}/>
+          <Image src="/assets/loading3.gif" alt="Logo" width={280} height={180} />
           <p className="font-semibold -mt-14">Preparando sua dieta...</p>
         </div>
-        
       )}
-      {responseText && (
+      {!isLoading && responseText && (
         <div className="min-h-screen w-full flex flex-col items-center justify-center">
-          <Image src="/assets/logo-nutriai.png" onClick={() => router.push("/")} className="mb-10 mt-10 cursor-pointer" alt="Logo" width={150} height={150} />
+          <Image
+            src="/assets/logo-nutriai.png"
+            onClick={() => router.push("/")}
+            className="mb-10 mt-10 cursor-pointer"
+            alt="Logo"
+            width={150}
+            height={150}
+          />
           <div className="flex flex-col items-center mb-4 bg-[#c7ccc3] p-5 rounded-xl w-10/12 md:w-4/6 xl:w-1/2">
             <h2 className="font-bold">🥗 Dieta:</h2>
-            <pre id="diet-content"className="whitespace-pre-wrap text-left font-sans mt-3 pb-2">{formatResponseText(responseText.replace(/['"]+/g, ''))}</pre>
-            <button  className="mt-6 mb-2 px-4 py-2 bg-[#e44141cf] text-white rounded font-semibold hover:bg-[#acc6ba]">
-              Exportar PDF
-          </button>
+            <pre className="whitespace-pre-wrap text-left font-sans mt-3 pb-2">
+              {formatResponseText(responseText.replace(/['"]+/g, ''))}
+            </pre>
           </div>
         </div>
       )}
