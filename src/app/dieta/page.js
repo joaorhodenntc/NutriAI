@@ -29,6 +29,8 @@ export default function QuizFinal() {
   }
 
   const handleExportPDF = () => {
+    if (typeof window === "undefined") return;
+    
     const element = document.getElementById("diet-content"); // elemento a ser exportado
     html2pdf().set({
       margin: 1,
