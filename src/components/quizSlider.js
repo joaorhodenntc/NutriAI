@@ -1,24 +1,21 @@
 "use client"
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { useQuiz } from "@/context/QuizContext";
+import { useEffect, useState } from "react";
 
-export default function QuizSlider({title, min=40, max= 150, onChange, route, measure}) {
+export default function QuizSlider({title, min=40, max= 150, onChange, measure}) {
     const [value, setValue] = useState(min);
-    const router = useRouter();
-    const { saveAnswer } = useQuiz();
-    
 
-    const handleSubmit = () => {
-       saveAnswer(title, measure === "cm" ? (value/100).toFixed(2) + measure : value + measure);
-       router.push(route);
-    }
+    useEffect(() => {
+      setValue(min);
+    }, [title, min]);
 
     const handleSliderChange = (event) => {
         setValue(event.target.value);
-        if(onChange){
-            onChange(newValue);
+    }
+
+    const handleNextClick = () => {
+        if (onChange){
+          onChange(value);
         }
     }
     
@@ -35,7 +32,7 @@ export default function QuizSlider({title, min=40, max= 150, onChange, route, me
           onChange={handleSliderChange}
         />
         <p className="mt-6">Selecionado: {measure === "cm" ? (value/100).toFixed(2) : value} {measure}</p>
-        <button  className="mt-6 mb-2 px-4 py-2 bg-[#c1d8cd] rounded font-semibold hover:bg-[#acc6ba]" onClick={handleSubmit}>
+        <button  className="mt-6 mb-2 px-4 py-2 bg-[#c1d8cd] rounded font-semibold hover:bg-[#acc6ba]" onClick={handleNextClick}>
             Próximo
         </button>
       </div>

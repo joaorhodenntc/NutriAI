@@ -1,9 +1,9 @@
-"use client"; // Certifique-se de que esta linha está presente
+"use client"; 
 
 import { useState, useEffect } from "react";
 import { useQuiz } from "@/context/QuizContext";
 import Image from "next/image";
-import { CohereClientV2 } from 'cohere-ai'; // Importação da biblioteca
+import { CohereClientV2 } from 'cohere-ai'; 
 
 export default function QuizFinal() {
   const { answers } = useQuiz();
@@ -38,6 +38,30 @@ export default function QuizFinal() {
     submit(); 
   }, [answers]);
 
+  const handleExportPDF = async () => {
+    const element = document.getElementById("diet-content");
+    const html2pdf = (await import("html2pdf.js")).default; 
+  
+    const options = {
+      margin: 1, 
+      filename: "dieta2.pdf",
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+    };
+  
+    html2pdf()
+      .set(options)
+      .from(element)
+      .save("dieta2.pdf")
+      .then(() => {
+        console.log("PDF gerado com margens com sucesso");
+      })
+      .catch((error) => {
+        console.error("Erro ao gerar PDF:", error);
+      });
+  };
+
   const formatResponseText = (text) => {
     const keywords = [
       "Café da manhã:",
@@ -60,7 +84,6 @@ export default function QuizFinal() {
     });
   };
 
-
   return (
     <div className="flex flex-col justify-center items-center min-h-screen text-center">
       {isLoading && (
@@ -81,9 +104,12 @@ export default function QuizFinal() {
           />
           <div className="flex flex-col items-center mb-4 bg-[#c7ccc3] p-5 rounded-xl w-10/12 md:w-4/6 xl:w-1/2">
             <h2 className="font-bold">🥗 Dieta:</h2>
-            <pre className="whitespace-pre-wrap text-left font-sans mt-3 pb-2">
+            <pre id="diet-content" className="whitespace-pre-wrap text-left font-sans mt-3 pb-2">
               {formatResponseText(responseText.replace(/['"]+/g, ''))}
             </pre>
+            <button  className="mt-6 mb-2 px-4 py-2 bg-[#e44141cf] text-white rounded font-semibold hover:bg-[#acc6ba]" onClick={handleExportPDF}>
+              Exportar PDF
+          </button>
           </div>
         </div>
       )}
