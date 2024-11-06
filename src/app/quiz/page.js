@@ -23,6 +23,12 @@ export default function QuizSinglePage() {
     }
   };
 
+  const handleBackClick = () => {
+    if (currentQuestionIndex > 0){
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
+    }
+  }
+
   return (
     <div className="flex flex-col items-center min-h-screen">
       <Image
@@ -40,12 +46,14 @@ export default function QuizSinglePage() {
             min={questions[currentQuestionIndex].min}
             max={questions[currentQuestionIndex].max}
             onChange={handleOptionClick}
+            onBackClick={handleBackClick}
         />
         ) : (
         <Quiz
             title={questions[currentQuestionIndex].title}
             options={questions[currentQuestionIndex].options}
             onAnswerSelect={handleOptionClick}
+            onBackClick={handleBackClick}
           />
       )}
     </div>
