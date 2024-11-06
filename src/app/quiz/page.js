@@ -54,6 +54,7 @@ export default function QuizSinglePage() {
             options={questions[currentQuestionIndex].options}
             onAnswerSelect={handleOptionClick}
             onBackClick={handleBackClick}
+            currentQuestionIndex={currentQuestionIndex}
           />
       )}
     </div>
