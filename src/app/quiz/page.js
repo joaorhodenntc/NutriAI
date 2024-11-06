@@ -4,7 +4,7 @@ import { useQuiz } from "@/context/QuizContext";
 import Image from "next/image";
 import Quiz from "@/components/quiz";
 import { useRouter } from "next/navigation";
-import QuizSlider from "@/components/quizSlider";
+import QuizInput from "@/components/quizInput";
 import questions from "@/data/questions";
 
 export default function QuizSinglePage() {
@@ -28,13 +28,13 @@ export default function QuizSinglePage() {
       <Image
         src="/assets/logo-nutriai.png"
         onClick={() => router.push("/")}
-        className="mb-10 mt-10 cursor-pointer sm:w-40"
+        className="mb-10 mt-10 cursor-pointer sm:w-36"
         alt="Logo"
         width={110}
         height={110}
       />
       {questions[currentQuestionIndex].type === "slider" ? (
-        <QuizSlider
+        <QuizInput
             title={questions[currentQuestionIndex].title}
             measure={questions[currentQuestionIndex].measure}
             min={questions[currentQuestionIndex].min}

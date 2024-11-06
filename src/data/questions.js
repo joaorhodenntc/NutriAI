@@ -26,8 +26,6 @@ const questions = [
     {
       title: "Qual sua altura (aproximada)? 📏",
       measure: "cm",
-      min: 130,
-      max: 210,
       type: "slider",
     },
     {
