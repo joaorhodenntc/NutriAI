@@ -4,13 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "postinstall": "npm install --legacy-peer-deps",
+    "build": "npm install --legacy-peer-deps && next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@heroicons/react": "1.x",
+    "@heroicons/react": "^2.1.5",
     "@next/font": "^14.2.15",
     "axios": "^1.7.7",
     "cohere-ai": "^7.14.0",
