@@ -33,7 +33,7 @@ export default function QuizSinglePage() {
         width={110}
         height={110}
       />
-      {questions[currentQuestionIndex].type === "slider" ? (
+      {questions[currentQuestionIndex].type === "input" ? (
         <QuizInput
             title={questions[currentQuestionIndex].title}
             measure={questions[currentQuestionIndex].measure}

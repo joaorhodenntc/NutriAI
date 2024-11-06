@@ -1,15 +1,23 @@
 "use client"
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function QuizInput({title, onChange, measure}) {
   const [value, setValue] = useState("");
+  const [showError, setShowError] = useState(false);
 
     const handleNextClick = () => {
-        if (onChange){
-          onChange(value + measure);
+        if (!value) {
+          setShowError(true);
         }
-        setValue("");
+        if(value){
+          if (onChange){
+            onChange(value + measure);
+          }
+          setValue("");
+          setShowError(false);
+        }
+        
     }
     
     return (
@@ -25,9 +33,10 @@ export default function QuizInput({title, onChange, measure}) {
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />
-          <span className="px-2 bg-gray-200 rounded-r-lg h-7 flex items-center">{measure}</span>
+          <span className="px-2 bg-gray-200 rounded-r-lg h-7 flex items-center font-semibold">{measure}</span>
         </div>
-        <button  className="mt-6 mb-2 px-4 py-2 bg-[#c1d8cd] rounded font-semibold hover:bg-[#acc6ba]" onClick={handleNextClick}>
+        {showError && <span className="mt-4 font-semibold text-red-700">Insira um valor válido</span>}
+        <button  className="mt-5 mb-2 px-4 py-2 bg-gray-200 rounded font-semibold sm:hover:bg-[#acc6ba]" onClick={handleNextClick}>
             Próximo
         </button>
       </div>

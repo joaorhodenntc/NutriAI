@@ -22,7 +22,7 @@ export default function QuizFinal() {
           messages: [
             {
               role: 'user',
-              content: `Com base nessas respostas, faça uma dieta para mim, envie SOMENTE e DIRETAMENTE as refeições: ${JSON.stringify(answers)}`,
+              content: `Com base nessas respostas, faça uma dieta, envie SOMENTE e DIRETAMENTE uma opção por refeição com uma simples instrução de como fazer. Abaixo da dieta envie uma justificativa de por que escolheu esta dieta: ${JSON.stringify(answers)}`,
             },
           ],
         });
@@ -64,7 +64,7 @@ export default function QuizFinal() {
 
   const formatResponseText = (text) => {
     const keywords = [
-      "Café da manhã:",
+      "Café da Manhã:",
       "Lanche da manhã:",
       "Almoço:",
       "Lanche da tarde:",
@@ -73,14 +73,19 @@ export default function QuizFinal() {
       "Jantar:",
       "Ceia:",
       "Antes de dormir",
+      "Justificativa"
     ];
 
     const escapedKeywords = keywords.map((keyword) => keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
 
-    const regex = new RegExp(`(${escapedKeywords.join("|")})`, "g");
+    const regex = new RegExp(`(${escapedKeywords.join("|")})`, "gi");
 
     return text.split(regex).map((part, index) => {
-      return keywords.includes(part) ? <strong key={index}>{part}</strong> : part;
+      return keywords.some((keyword) => keyword.toLowerCase() === part.toLowerCase()) ? (
+        <strong key={index}>{part}</strong>
+      ) : (
+        part
+      );
     });
   };
 
