@@ -28,7 +28,7 @@ export default function QuizSinglePage() {
       <Image
         src="/assets/logo-nutriai.png"
         onClick={() => router.push("/")}
-        className="mb-10 mt-10 cursor-pointer sm:w-36"
+        className="mb-5 mt-10 cursor-pointer sm:w-36"
         alt="Logo"
         width={110}
         height={110}

@@ -97,10 +97,10 @@ export default function QuizFinal() {
           <Image
             src="/assets/logo-nutriai.png"
             onClick={() => router.push("/")}
-            className="mb-10 mt-10 cursor-pointer"
+            className="mb-5 mt-10 cursor-pointer sm:w-36"
             alt="Logo"
-            width={150}
-            height={150}
+            width={110}
+            height={110}
           />
           <div className="flex flex-col items-center mb-4 bg-[#c7ccc3] p-5 rounded-xl w-10/12 md:w-4/6 xl:w-1/2">
             <h2 className="font-bold">🥗 Dieta:</h2>
