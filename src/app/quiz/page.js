@@ -28,10 +28,10 @@ export default function QuizSinglePage() {
       <Image
         src="/assets/logo-nutriai.png"
         onClick={() => router.push("/")}
-        className="mb-10 mt-10 cursor-pointer"
+        className="mb-10 mt-10 cursor-pointer sm:w-40"
         alt="Logo"
-        width={150}
-        height={150}
+        width={110}
+        height={110}
       />
       {questions[currentQuestionIndex].type === "slider" ? (
         <QuizSlider
