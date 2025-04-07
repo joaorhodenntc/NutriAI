@@ -27,7 +27,7 @@ export default function QuizFinal() {
           messages: [
             {
               role: "user",
-              content: process.env.NEXT_PUBLIC_COHERE_PROMPT.replace("{answers}", JSON.stringify(answers)),
+              content: JSON.stringify(answers) + process.env.NEXT_PUBLIC_COHERE_PROMPT,
             },
           ],
         })
