@@ -35,6 +35,12 @@ export default function QuizSinglePage() {
   const progress = (currentQuestionIndex / (questions.length - 1)) * 100
   const currentQuestion = questions[currentQuestionIndex]
 
+  const handleBackClick = () => {
+    if (currentQuestionIndex > 0){
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
+    }
+  }
+
   return (
     <div className="flex flex-col items-center min-h-screen bg-gradient-to-b from-[#f8f9f8] to-white">
       <div className="w-full max-w-7xl px-4">
