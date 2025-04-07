@@ -1,6 +1,7 @@
 const questions = [
   {
-    title: "Qual o seu principal objetivo com essa dieta? 🥗",
+    title: "Qual o seu principal objetivo com essa dieta?",
+    iconName: "Target",
     options: [
       { letter: "A", text: "Perda de peso" },
       { letter: "B", text: "Ganhar massa muscular" },
@@ -9,7 +10,8 @@ const questions = [
     ],
   },
   {
-    title: "Qual é a sua idade? ⏳",
+    title: "Qual é a sua idade?",
+    iconName: "Clock",
     options: [
       { letter: "A", text: "Menos de 18 anos" },
       { letter: "B", text: "18-24 anos" },
@@ -19,17 +21,20 @@ const questions = [
     ],
   },
   {
-    title: "Qual seu peso atual (aproximado)? 🏋️",
+    title: "Qual seu peso atual (aproximado)?",
+    iconName: "Weight",
     measure: "kg",
     type: "input",
   },
   {
-    title: "Qual sua altura (aproximada)? 📏",
+    title: "Qual sua altura (aproximada)?",
+    iconName: "Ruler",
     measure: "cm",
     type: "input",
   },
   {
-    title: "Qual o seu nível de atividade física atual? 🏃",
+    title: "Qual o seu nível de atividade física atual?",
+    iconName: "Activity",
     options: [
       { letter: "A", text: "Sedentário (pouca ou nenhuma atividade física)" },
       { letter: "B", text: "Leve (exercício 1-2 dias por semana)" },
@@ -39,7 +44,8 @@ const questions = [
     ],
   },
   {
-    title: "Qual a sua rotina de trabalho? 💼",
+    title: "Qual a sua rotina de trabalho?",
+    iconName: "Briefcase",
     options: [
       { letter: "A", text: "Predominantemente sedentária (exemplo: escritório)" },
       { letter: "B", text: "Moderada (exemplo: atividades em pé, andando)" },
@@ -47,7 +53,8 @@ const questions = [
     ],
   },
   {
-    title: "Com que frequência você costuma comer? 🍽️",
+    title: "Com que frequência você costuma comer?",
+    iconName: "Utensils",
     options: [
       { letter: "A", text: "3 refeições principais ao dia" },
       { letter: "B", text: "3 refeições principais + 1 ou 2 lanches" },
@@ -56,7 +63,8 @@ const questions = [
     ],
   },
   {
-    title: "Possui alguma preferência alimentar ou restrição? 🍲",
+    title: "Possui alguma preferência alimentar ou restrição?",
+    iconName: "Apple",
     options: [
       { letter: "A", text: "Vegetariano" },
       { letter: "B", text: "Vegano" },
@@ -67,7 +75,8 @@ const questions = [
     ],
   },
   {
-    title: "Há alguma condição de saúde que precise ser considerada? 🩺",
+    title: "Há alguma condição de saúde que precise ser considerada?",
+    iconName: "Heart",
     options: [
       { letter: "A", text: "Hipertensão" },
       { letter: "B", text: "Diabetes" },
@@ -77,7 +86,8 @@ const questions = [
     ],
   },
   {
-    title: "Qual o seu orçamento mensal para alimentação? 💰",
+    title: "Qual o seu orçamento mensal para alimentação?",
+    iconName: "DollarSign",
     options: [
       { letter: "A", text: "Até R$300" },
       { letter: "B", text: "R$300-R$500" },
@@ -86,7 +96,8 @@ const questions = [
     ],
   },
   {
-    title: "Quanto tempo você tem para preparar suas refeições diariamente? ⏲️",
+    title: "Quanto tempo você tem para preparar suas refeições diariamente?",
+    iconName: "Timer",
     options: [
       { letter: "A", text: "Tempo limitado (preciso de refeições rápidas)" },
       { letter: "B", text: "Tempo moderado (posso cozinhar, mas com limitações)" },
@@ -94,7 +105,8 @@ const questions = [
     ],
   },
   {
-    title: "Existe algum alimento que você realmente não gosta ou prefere evitar? ❌",
+    title: "Existe algum alimento que você realmente não gosta ou prefere evitar?",
+    iconName: "Ban",
     options: [
       { letter: "A", text: "Carnes" },
       { letter: "B", text: "Vegetais" },
@@ -103,6 +115,7 @@ const questions = [
       { letter: "E", text: "Nenhum" },
     ],
   },
-];
+]
 
-export default questions;
+export default questions
+
